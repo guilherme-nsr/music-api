@@ -37,3 +37,26 @@ class Music(models.Model):
 
     class Meta:
         ordering = ('title',)
+
+
+class Person(models.Model):
+    full_name = models.CharField(max_length=200)
+    username = models.CharField(max_length=200)
+
+    def __str__(self):
+        return self.username
+
+    class Meta:
+        ordering = ('username',)
+
+
+class Playlist(models.Model):
+    title = models.CharField(max_length=200)
+    author = models.ForeignKey(Person, on_delete=models.CASCADE, related_name='playlists', default=None)
+    musics = models.ManyToManyField(Music, related_name='playlists')
+
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        ordering = ('title',)
