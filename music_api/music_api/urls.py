@@ -15,7 +15,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from musics.views import ArtistDetail, ArtistList
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('artists/<int:pk>/', ArtistDetail.as_view(), name=ArtistDetail.name),
+    path('artists/', ArtistList.as_view(), name=ArtistList.name)
 ]
