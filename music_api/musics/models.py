@@ -10,6 +10,9 @@ class Artist(models.Model):
     def __str__(self):
         return self.name
 
+    class Meta:
+        ordering = ('name',)
+
 
 class Album(models.Model):
     title = models.CharField(max_length=200)
@@ -20,6 +23,9 @@ class Album(models.Model):
     def __str__(self):
         return self.title
 
+    class Meta:
+        ordering = ('title',)
+
 
 class Music(models.Model):
     title = models.CharField(max_length=200)
@@ -28,3 +34,6 @@ class Music(models.Model):
 
     def __str__(self):
         return self.title
+
+    class Meta:
+        ordering = ('title',)
