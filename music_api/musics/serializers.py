@@ -33,6 +33,9 @@ class PersonSerializer(HyperlinkedModelSerializer):
 
 
 class PlaylistSerializer(HyperlinkedModelSerializer):
+    author = PersonSerializer()
+    musics = MusicSerializer(many=True, read_only=True)
+
     class Meta:
         model = Playlist
         fields = ('url', 'pk', 'title', 'author', 'musics')
