@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from rest_framework.generics import RetrieveUpdateDestroyAPIView, ListCreateAPIView
-from .models import Artist, Album, Music, Person
-from .serializers import ArtistSerializer, AlbumSerializer, MusicSerializer, PersonSerializer
+from .models import Artist, Album, Music, Person, Playlist
+from .serializers import ArtistSerializer, AlbumSerializer, MusicSerializer, PersonSerializer, PlaylistSerializer
 
 # Create your views here.
 
@@ -52,3 +52,15 @@ class PersonList(ListCreateAPIView):
     queryset = Person.objects.all()
     serializer_class = PersonSerializer
     name = 'person-list'
+
+
+class PlaylistDetail(RetrieveUpdateDestroyAPIView):
+    queryset = Playlist.objects.all()
+    serializer_class = PlaylistSerializer
+    name = 'playlist-detail'
+
+
+class PlaylistList(ListCreateAPIView):
+    queryset = Playlist.objects.all()
+    serializer_class = PlaylistSerializer
+    name = 'playlist-list'

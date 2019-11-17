@@ -1,5 +1,5 @@
 from rest_framework.serializers import HyperlinkedModelSerializer, SlugRelatedField
-from .models import Artist, Album, Music, Person
+from .models import Artist, Album, Music, Person, Playlist
 
 
 class AlbumSerializer(HyperlinkedModelSerializer):
@@ -30,3 +30,9 @@ class PersonSerializer(HyperlinkedModelSerializer):
     class Meta:
         model = Person
         fields = ('url', 'pk', 'username', 'full_name')
+
+
+class PlaylistSerializer(HyperlinkedModelSerializer):
+    class Meta:
+        model = Playlist
+        fields = ('url', 'pk', 'title', 'author', 'musics')
