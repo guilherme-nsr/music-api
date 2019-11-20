@@ -3,7 +3,6 @@ from rest_framework.generics import RetrieveUpdateDestroyAPIView, ListCreateAPIV
 from .models import Artist, Album, Music, Person, Playlist
 from .serializers import ArtistSerializer, AlbumSerializer, MusicSerializer, PersonSerializer, PlaylistSerializer
 
-# Create your views here.
 
 
 class ArtistDetail(RetrieveUpdateDestroyAPIView):
