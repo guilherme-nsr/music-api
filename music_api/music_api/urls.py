@@ -8,6 +8,7 @@ schema_view = get_swagger_view(title='Music API')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', ApiRoot.as_view(), name=ApiRoot.name),
     path('artists/<int:pk>/', ArtistDetail.as_view(), name=ArtistDetail.name),
     path('artists/', ArtistList.as_view(), name=ArtistList.name),
     path('albums/<int:pk>/', AlbumDetail.as_view(), name=AlbumDetail.name),
