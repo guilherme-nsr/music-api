@@ -1,7 +1,9 @@
 from django.db import models
+from django.contrib.auth import get_user_model
 
 # Create your models here.
 
+User = get_user_model()
 
 class Artist(models.Model):
     name = models.CharField(max_length=200)
@@ -40,6 +42,7 @@ class Music(models.Model):
 
 
 class Person(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="person")
     full_name = models.CharField(max_length=200)
     username = models.CharField(max_length=200)
 
