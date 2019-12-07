@@ -7,6 +7,7 @@ from rest_framework.authtoken.models import Token
 from .models import *
 from .serializers import *
 from .permissions import *
+from rest_framework.throttling import ScopedRateThrottle
 
 
 class ApiRoot(generics.GenericAPIView):
@@ -65,11 +66,15 @@ class PersonDetail(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = PersonSerializer
     name = 'person-detail'
     permission_classes = (IsOwnerOrReadOnly,)
+    throttle_scope = 'users'
+    throttle_classes = (ScopedRateThrottle,)
 
 class PersonList(generics.ListCreateAPIView):
     queryset = Person.objects.all()
     serializer_class = PersonSerializer
     name = 'person-list'
+    throttle_scope = 'users'
+    throttle_classes = (ScopedRateThrottle,)
 
 
 class PlaylistDetail(generics.RetrieveUpdateDestroyAPIView):
@@ -77,6 +82,8 @@ class PlaylistDetail(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = PlaylistSerializer
     name = 'playlist-detail'
     permission_classes = (IsOwnerOrReadOnly,)
+    throttle_scope = 'playlists'
+    throttle_classes = (ScopedRateThrottle,)
 
 
 class PlaylistList(generics.ListCreateAPIView):
@@ -84,3 +91,5 @@ class PlaylistList(generics.ListCreateAPIView):
     serializer_class = PlaylistSerializer
     name = 'playlist-list'
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+    throttle_scope = 'playlists'
+    throttle_classes = (ScopedRateThrottle,)
