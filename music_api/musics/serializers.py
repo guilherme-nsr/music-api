@@ -1,6 +1,15 @@
-from rest_framework.serializers import HyperlinkedModelSerializer, SlugRelatedField
+from rest_framework.serializers import HyperlinkedModelSerializer, SlugRelatedField, ModelSerializer
 from .models import Artist, Album, Music, Person, Playlist
 
+from django.contrib.auth import get_user_model
+
+
+User = get_user_model()
+
+class UserSerializer(ModelSerializer):
+    class Meta:
+        model = User
+        fields = ('username', 'email',)
 
 class AlbumSerializer(HyperlinkedModelSerializer):
     artist = SlugRelatedField(queryset=Artist.objects.all(), slug_field='name')
