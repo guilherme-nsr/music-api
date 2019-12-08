@@ -8,6 +8,8 @@ from .models import *
 from .serializers import *
 from .permissions import *
 from rest_framework.throttling import ScopedRateThrottle
+from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework import filters
 
 
 class ApiRoot(generics.GenericAPIView):
@@ -45,6 +47,10 @@ class AlbumList(generics.ListCreateAPIView):
     queryset = Album.objects.all()
     serializer_class = AlbumSerializer
     name = 'album-list'
+    filter_backends = [DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter]
+    filterset_fields = ['artist']
+    search_fields = ['title']
+    ordering_fields = ['title']
     permission_classes = (IsAdminOrReadOnly,)
 
 class MusicDetail(generics.RetrieveUpdateDestroyAPIView):
@@ -58,6 +64,10 @@ class MusicList(generics.ListCreateAPIView):
     queryset = Music.objects.all()
     serializer_class = MusicSerializer
     name = 'music-list'
+    filter_backends = [DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter]
+    filterset_fields = ['album']
+    search_fields = ['title']
+    ordering_fields = ['title']
     permission_classes = (IsAdminOrReadOnly,)
 
 
@@ -72,6 +82,7 @@ class PersonDetail(generics.RetrieveUpdateDestroyAPIView):
 class PersonList(generics.ListCreateAPIView):
     queryset = Person.objects.all()
     serializer_class = PersonSerializer
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
     name = 'person-list'
     throttle_scope = 'users'
     throttle_classes = (ScopedRateThrottle,)
