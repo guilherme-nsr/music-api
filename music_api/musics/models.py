@@ -5,6 +5,7 @@ from django.contrib.auth import get_user_model
 
 User = get_user_model()
 
+
 class Artist(models.Model):
     name = models.CharField(max_length=200)
     debut_year = models.IntegerField()
@@ -33,6 +34,7 @@ class Music(models.Model):
     title = models.CharField(max_length=200)
     length = models.PositiveIntegerField()
     album = models.ForeignKey(Album, on_delete=models.CASCADE, related_name='musics', default=None)
+    artist = models.ForeignKey(Artist, on_delete=models.CASCADE, related_name='musics', default=None)
 
     def __str__(self):
         return self.title

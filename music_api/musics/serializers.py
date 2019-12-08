@@ -14,10 +14,11 @@ class UserSerializer(ModelSerializer):
 
 class MusicSerializer(HyperlinkedModelSerializer):
     album = SlugRelatedField(queryset=Album.objects.all(), slug_field='title')
+    artist = SlugRelatedField(queryset=Artist.objects.all(), slug_field='name')
 
     class Meta:
         model = Music
-        fields = ('url', 'pk', 'title', 'length', 'album')
+        fields = ('url', 'pk', 'title', 'length', 'album', 'artist')
 
 
 class AlbumSerializer(HyperlinkedModelSerializer):
