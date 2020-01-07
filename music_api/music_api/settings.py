@@ -41,9 +41,11 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework_swagger',
     'musics',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -147,3 +149,7 @@ REST_FRAMEWORK = {
 
 LOGIN_URL = 'rest_framework:login'
 LOGOUT_URL = 'rest_framework:logout'
+
+CORS_ORIGIN_WHITELIST = [
+    "http://localhost:4200"
+]
