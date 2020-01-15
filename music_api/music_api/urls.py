@@ -3,7 +3,7 @@ from django.urls import path, include
 from musics.views import *
 
 from rest_framework_swagger.views import get_swagger_view
-from rest_framework_simplejwt import views as jwt_views
+from rest_framework_jwt.views import obtain_jwt_token, refresh_jwt_token
 
 schema_view = get_swagger_view(title='Music API')
 
@@ -21,8 +21,8 @@ urlpatterns = [
     path('playlists/<int:pk>/', PlaylistDetail.as_view(), name=PlaylistDetail.name),
     path('playlists/', PlaylistList.as_view(), name=PlaylistList.name),
     path('doc/', schema_view),
-    path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
-    path('api/token/', jwt_views.TokenObtainPairView.as_view(), name='token_obtain_pair'),
-    path('api/token/refresh/', jwt_views.TokenRefreshView.as_view(), name='token_refresh'),
+    path('auth/', include('rest_auth.urls')),
+    path('auth/signup/', include('rest_auth.registration.urls')),
+    path('auth/refresh-token/', refresh_jwt_token),
     
 ]

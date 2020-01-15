@@ -5,3 +5,7 @@ django-filter
 django-rest-swagger
 djangorestframework-simplejwt
 django-cors-headers
+
+djangorestframework-jwt
+django-rest-auth 
+django-allauth
